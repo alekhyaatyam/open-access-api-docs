@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Open Access Research API
   version: 1.0.0
-  description: A simple API that serves open-access research articles.
+  description: API serving open-access research articles in JSON or XML format.
 
 servers:
   - url: http://127.0.0.1:5000
@@ -12,9 +12,19 @@ paths:
   /api/articles:
     get:
       summary: Get all open-access articles
+      description: Returns all articles. You can choose JSON or XML format.
+      parameters:
+        - in: query
+          name: format
+          required: false
+          schema:
+            type: string
+            enum: [json, xml]
+            default: json
+          description: Response format (default is JSON)
       responses:
         "200":
-          description: A list of articles
+          description: A list of open-access research articles
           content:
             application/json:
               example:
@@ -23,3 +33,28 @@ paths:
                   authors: ["Alice Johnson", "Mark Lee"]
                   journal: "Open Access Energy Journal"
                   year: 2023
+                - id: 2
+                  title: "AI in Healthcare"
+                  authors: ["John Doe", "Jane Smith"]
+                  journal: "PLOS One"
+                  year: 2024
+            application/xml:
+              example: |
+                <articles>
+                  <item>
+                    <id>1</id>
+                    <title>Climate Change and Renewable Energy</title>
+                    <authors>Alice Johnson</authors>
+                    <authors>Mark Lee</authors>
+                    <journal>Open Access Energy Journal</journal>
+                    <year>2023</year>
+                  </item>
+                  <item>
+                    <id>2</id>
+                    <title>AI in Healthcare</title>
+                    <authors>John Doe</authors>
+                    <authors>Jane Smith</authors>
+                    <journal>PLOS One</journal>
+                    <year>2024</year>
+                  </item>
+                </articles>
