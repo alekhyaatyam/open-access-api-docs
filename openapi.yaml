@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Open Access Research API
+  version: 1.0.0
+  description: A simple API that serves open-access research articles.
+
+servers:
+  - url: http://127.0.0.1:5000
+    description: Local Flask server
+
+paths:
+  /api/articles:
+    get:
+      summary: Get all open-access articles
+      responses:
+        "200":
+          description: A list of articles
+          content:
+            application/json:
+              example:
+                - id: 1
+                  title: "Climate Change and Renewable Energy"
+                  authors: ["Alice Johnson", "Mark Lee"]
+                  journal: "Open Access Energy Journal"
+                  year: 2023
